@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸運轉盤抽籤</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Left Panel: Controls -->
+        <aside class="sidebar">
+            <header class="app-header">
+                <h1><span class="gradient-text">幸運轉盤</span> 🎁</h1>
+                <p>上課抽籤小幫手</p>
+            </header>
+
+            <div class="panel-section">
+                <h2>⚙️ 抽籤設定</h2>
+                
+                <div class="setting-row">
+                    <label for="drawCount">一次抽出幾人：</label>
+                    <select id="drawCount" class="custom-select">
+                        <option value="1">1 人</option>
+                        <option value="2">2 人</option>
+                        <option value="3">3 人</option>
+                        <option value="4">4 人</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+
+            <div class="panel-section history-section">
+                <h2>🏆 歷史紀錄</h2>
+                <ul id="historyList" class="history-list">
+                    <li class="empty-msg">尚未開始抽籤</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Right Panel: Wheel Canvas -->
+        <main class="main-content">
+            <div class="wheel-area">
+                <div class="wheel-pointer"></div>
+                <div class="wheel-container">
+                    <canvas id="wheelCanvas" width="800" height="800"></canvas>
+                </div>
+                <button class="btn-spin" id="btnSpin">SPIN!</button>
+            </div>
+        </main>
+
+        <!-- Right Panel: List Management -->
+        <aside class="sidebar right-panel">
+            <div class="panel-section list-section" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="list-header" style="margin-bottom: 15px;">
+                    <h2>👥 名單管理 
+                        <span class="badge" id="nameCountBadge">0 人</span>
+                    </h2>
+                    <div class="file-upload-wrapper">
+                        <button class="btn btn-sm btn-outline">📂 上傳 txt</button>
+                        <input type="file" id="fileInput" accept=".txt">
+                    </div>
+                </div>
+                
+                <textarea id="namesInput" class="names-textarea" style="flex: 1; min-height: 200px; margin-bottom: 10px;" placeholder="在此輸入名單，每行一個名字..."></textarea>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="btnUpdateWheel">更新轉盤</button>
+                    <button class="btn btn-danger" id="btnReset">重置名單</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal-content">
+            <div class="confetti-container" id="confettiContainer"></div>
+            <h2 class="modal-title">🎉 恭喜中獎 🎉</h2>
+            <div class="winners-container" id="winnersContainer">
+                <div class="winner-card">
+                    <span class="winner-name">吳瑋澄</span>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="btnModalClose">完成 / 確定</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+</body>
+</html>
